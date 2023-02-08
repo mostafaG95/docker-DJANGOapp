@@ -7,7 +7,7 @@ on:
 
 env:
   DOCKER_USERNAME: mostafag95
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_PASSWORD: ${{ secrets.PASSWORD }}
 
 jobs:
   build:
@@ -23,8 +23,8 @@ jobs:
         docker images
 
     - name: Login to Docker Hub
-      run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
+      run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin -H
+      
     - name: Push Docker Image
       run: |
         docker push "$DOCKER_USERNAME/django:$GITHUB_SHA"
